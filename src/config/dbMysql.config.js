@@ -17,7 +17,7 @@ pool.getConnection()
         
         await connection.query(`USE ${ENVIROMENT.MYSQL.DATABASE}`)
         console.log('Conexión con MySQL exitosa y base de datos seleccionada')
-        connection.release()
+        
     })
     .catch((err) => {
         console.error('Error en la conexión: ', err)
