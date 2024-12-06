@@ -136,12 +136,13 @@ export const loginController = async (req, res, next) => {
         const { email, password } = req.body
 
         const usuarioEncontrado = await UserRepositoryMySQL.getUserByEmail(email)
+
         if (!usuarioEncontrado) {
             return next(new AppError('El email ingresado no pertenece a ningún usuario.', 400))
         }
-/*         if (!(await bcrypt.compare(password, usuarioEncontrado.password))) {
+        if (!(await bcrypt.compare(password, usuarioEncontrado.password))) {
             return next(new AppError('El password ingresado es incorrecto', 400))
-        } */
+        }
 
         const accessToken = jwt.sign(
             {
@@ -155,7 +156,6 @@ export const loginController = async (req, res, next) => {
                 expiresIn: '1d' //Esto determina cuanto dura la sesion
             }
         )
-       
         const responseSuccess = new ResponseBuilder()
             .setOk(true)
             .setStatus(200)

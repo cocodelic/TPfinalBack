@@ -1,7 +1,7 @@
 import ENVIROMENT from "../config/enviroment.js";
 import ResponseBuilder from "../helpers/builders/ResponseBuilder.js";
 import AppError from "../helpers/errors/app.error.js";
-import{ ProductRepository, ProductRepositoryMySQL }from "../repositories/product.repository.js";
+import{ ProductRepositoryMySQL }from "../repositories/product.repository.js";
 import jwt from 'jsonwebtoken'
 
 
@@ -141,8 +141,6 @@ const getUserProducts = async (req, res, next) => {
     try{
         
         const userId = req.userId
-
-        console.log(userId)
         const products = await ProductRepositoryMySQL.getUserProducts(userId)
         
         if(products.length === 0){

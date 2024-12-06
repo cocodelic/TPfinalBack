@@ -17,11 +17,11 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         })
     }
 
-    console.error('ERROR: 😢🔴', err)
+    console.error('🔴', err)
 
     return res.status(500).json({
         status: 'error',
-        message: 'Algo anda muy mal aqui...'
+        message: 'Hubo un error de servidor'
     })
 }
 
