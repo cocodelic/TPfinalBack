@@ -117,17 +117,13 @@ const deleteProductController = async (req, res, next) => {
     try{
         const { product_id } = req.params
 
-        const productoRestante = await ProductRepositoryMySQL.deleteProduct(product_id)
-        console.log(productoRestante)
-        if(productoRestante.length === 0){
-            return next(new AppError("No se encontró el producto solicitado", 404))
-        }
+        await ProductRepositoryMySQL.deleteProduct(product_id)
+               
         const response = new ResponseBuilder()
         .setCode('PRODUCT_DELETE_SUCCESS')
         .setMessage('Producto eliminado con éxito.')
         .setOk(true)
         .setStatus(200)
-        .setPayload(productoRestante)
         .build()
         res.json(response)
 
