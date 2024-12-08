@@ -58,7 +58,9 @@ class ProductRepositoryMySQL {
     static async deleteProduct(product_id) {
         const result = await pool.execute('UPDATE Products SET active = false WHERE id = ? AND active = 1', [product_id])
 
-        return result
+        const productoEliminado = await pool.execute('SELECT * FROM Products WHERE id = ?', [product_id])
+
+        return productoEliminado[0]
     }
 
     static async getUserProducts(userId) {
