@@ -57,9 +57,9 @@ export const removeProductFromCartController = async (req, res, next) => {
 
     try{
 
-    const { product_id } = req.body
+    const { productId } = req.params
 
-    await CartRepositoryMySQL.removeProductFromCart(req.userId, product_id)
+    await CartRepositoryMySQL.removeProductFromCart(req.userId, productId)
 
     const response = new ResponseBuilder()
     .setCode('PRODUCT_REMOVED_SUCCESS')
@@ -68,11 +68,12 @@ export const removeProductFromCartController = async (req, res, next) => {
     .setStatus(200)
     .build()
 
+    return res.json(response)
+
     }catch(err){
         return next(new AppError(err.message))
     }
 
 
 }
-
 

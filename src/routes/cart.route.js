@@ -7,7 +7,7 @@ const cartRouter = express.Router()
 
 cartRouter.get('/',authMiddleware(['admin']), getAllCartProductsController)
 cartRouter.post('/:productId',authMiddleware(['admin']), addProductToCartController)
-cartRouter.delete('/', authMiddleware(['admin']), removeProductFromCartController)
+cartRouter.delete('/:productId', authMiddleware(['admin']), removeProductFromCartController)
 
 
 
