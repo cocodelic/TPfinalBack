@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt'
 import { validateEmail, validateMinLength, validateString } from "../helpers/validations.js"
 import ResponseBuilder from "../helpers/builders/ResponseBuilder.js"
-import User from "../model/User.model.js"
 import emailTransporter from "../helpers/emailTransporter.helper.js"
 import jwt from 'jsonwebtoken'
 import ENVIROMENT from '../config/enviroment.js'
-import { UserRepository, UserRepositoryMySQL } from '../repositories/user.repository.js'
+import { UserRepositoryMySQL } from '../repositories/user.repository.js'
 import AppError from '../helpers/errors/app.error.js'
 
 export const registerController = async (req, res, next) => {
@@ -72,7 +71,7 @@ export const registerController = async (req, res, next) => {
         await emailTransporter.sendMail({
             to: email,
             subject: 'Verifica tu email',
-            html: `<p>Para validar su email haga click <a href="http://localhost:5173/validate-email/${validationToken}">aquí</a></p>`
+            html: `<p>Para validar su email haga click <a href="https://tp-final-front-one.vercel.app/validate-email/${validationToken}">aquí</a></p>`
         })
 
         const successResponse = new ResponseBuilder()
@@ -191,7 +190,7 @@ export const forgotPasswordController = async (req, res, next) => {
             expiresIn: '1d'
         })
 
-        const resetUrl = 'http://localhost:5173/reset-password/' + tokenResetPassword
+        const resetUrl = 'https://tp-final-front-one.vercel.app/reset-password/' + tokenResetPassword
 
         emailTransporter.sendMail({
             to: email,
